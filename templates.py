@@ -269,3 +269,9 @@ class Countries(Enum):
     YEMEN = "YE"
     ZAMBIA = "ZM"
     ZIMBABWE = "ZW"
+
+    def get_list_of_values():
+        return [item.value for item in Countries]
+    
+    def get_list_of_names():
+        return [item.name for item in Countries]
