@@ -2,7 +2,7 @@ import requests
 from templates import HEADER, AnonymityTypesTemplate, Proxy, ProxyTypesTemplate
 
 
-def parse_geonode(limit: int, country: list, type: str, anon: str) -> set:
+def parse_geonode(limit: int, country: list, type: str, anon: str) -> set[Proxy]:
     data = set()
     for country in country:
         response = requests.get(
@@ -20,7 +20,10 @@ def get_from_geonode(
     country: list = ["US"],
     types: list = ["HTTP"],
     anonimity: list = ["NONE"],
-) -> set:
+) -> set[Proxy]:
+    '''
+    Method that collect proxies geonode.com
+    '''
     data = parse_geonode(
         limit=limit,
         country=country,

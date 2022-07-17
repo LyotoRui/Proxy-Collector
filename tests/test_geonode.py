@@ -1,8 +1,6 @@
 import pytest
 import requests
 
-from parsers.geonode import parse_geonode, get_from_geonode
-
 
 def test_geonode_connection():
     assert requests.get("https://proxylist.geonode.com/").status_code == 200

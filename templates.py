@@ -7,6 +7,7 @@ HEADER = {
 
 
 class Proxy:
+    '''Base class for proxy object.'''
     ip: str
     port: str
     country: str
@@ -52,6 +53,11 @@ class AnonymityTypesTemplate(Enum):
 
 
 class Countries(Enum):
+    '''
+    Class than contains Alpha-2 codes of different countries.
+    
+    Inherited from Enum.
+    '''
     AFGHANISTAN = "AF"
     ALBANIA = "AL"
     ALGERIA = "DZ"
