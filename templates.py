@@ -1,50 +1,53 @@
 from enum import Enum
+from time import monotonic
 
 HEADER = {
-    'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.115 Safari/537.36 OPR/88.0.4412.75'
+    "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.115 Safari/537.36 OPR/88.0.4412.75"
 }
 
+
+class Proxy:
+    ip: str
+    port: str
+    country: str
+    speed: float
+
+    def __init__(self, ip: str, port: str, country: str, speed: float = None) -> None:
+        self.ip = ip
+        self.port = port
+        self.country = country
+        self.speed = speed
+
+    def __repr__(self) -> str:
+        return f"{self.country} -- {self.ip}:{self.port} - {self.speed}"
+
+
 class ProxyTypes(Enum):
-    HTTP = 'HTTP'
-    HTTPS = 'HTTPS'
-    SOCKS4 = 'SOCKS4'
-    SOCKS5 = 'SOCKS5'
+    HTTP = "HTTP"
+    HTTPS = "HTTPS"
+    SOCKS4 = "SOCKS4"
+    SOCKS5 = "SOCKS5"
 
 
 class AnonymityTypes(Enum):
-    HIGH = 'HIGH'
-    MENIUIM = 'MEDIUM'
-    LOW = 'LOW'
-    NONE = 'NONE'
+    HIGH = "HIGH"
+    MENIUIM = "MEDIUM"
+    LOW = "LOW"
+    NONE = "NONE"
 
 
 class ProxyTypesTemplate(Enum):
-    HIDEMY = {
-        'HTTP': 'h',
-        'HTTPS': 's',
-        'SOCKS4': '4',
-        'SOCKS5': '5'
-    }
-    GEONODE = {
-        'HTTP': 'http',
-        'HTTPS': 'https',
-        'SOCKS4': 'sock4',
-        'SOCKS5': 'socks5'
-    }
+    HIDEMY = {"HTTP": "h", "HTTPS": "s", "SOCKS4": "4", "SOCKS5": "5"}
+    GEONODE = {"HTTP": "http", "HTTPS": "https", "SOCKS4": "sock4", "SOCKS5": "socks5"}
 
 
 class AnonymityTypesTemplate(Enum):
-    HIDEMY = {
-        'HIGH': '4',
-        'MEDIUM': '3',
-        'LOW': '2',
-        'NONE': '1'
-    }
+    HIDEMY = {"HIGH": "4", "MEDIUM": "3", "LOW": "2", "NONE": "1"}
     GEONODE = {
-        'HIGH': 'elite',
-        'MEDIUM': 'anonymous',
-        'LOW': 'anonymous',
-        'NONE': 'transparent'
+        "HIGH": "elite",
+        "MEDIUM": "anonymous",
+        "LOW": "anonymous",
+        "NONE": "transparent",
     }
 
 
