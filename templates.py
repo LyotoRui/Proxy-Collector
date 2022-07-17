@@ -29,6 +29,11 @@ class ProxyTypes(Enum):
     SOCKS4 = "SOCKS4"
     SOCKS5 = "SOCKS5"
 
+    def get_list_of_values():
+        return [type.value for type in ProxyTypes]
+    
+    def get_list_of_names():
+        return [type.name for type in ProxyTypes]
 
 class AnonymityTypes(Enum):
     HIGH = "HIGH"
@@ -36,6 +41,11 @@ class AnonymityTypes(Enum):
     LOW = "LOW"
     NONE = "NONE"
 
+    def get_list_of_values():
+        return [type.value for type in AnonymityTypes]
+    
+    def get_list_of_names():
+        return [type.name for type in AnonymityTypes]
 
 class ProxyTypesTemplate(Enum):
     HIDEMY = {"HTTP": "h", "HTTPS": "s", "SOCKS4": "4", "SOCKS5": "5"}

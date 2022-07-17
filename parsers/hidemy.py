@@ -1,14 +1,19 @@
 import requests
 from bs4 import BeautifulSoup
 from templates import HEADER, AnonymityTypesTemplate, Proxy, ProxyTypesTemplate
+from requests.exceptions import ReadTimeout
 
 
-def parse_hidemy(limit: int, countries: str, type: str, anon: str) -> set:
+def parse_hidemy(limit: int, countries: str, type: str, anon: str) -> set | None:
     for country in countries:
-        response = requests.get(
-            f"https://hidemy.name/ru/proxy-list/?country={country}&type={type}&anon={anon}#list",
-            headers=HEADER,
-        ).text
+        try:
+            response = requests.get(
+                f"https://hidemy.name/ru/proxy-list/?country={country}&type={type}&anon={anon}#list",
+                headers=HEADER,
+                timeout=5
+            ).text
+        except ReadTimeout:
+            return set()
 
         soup = BeautifulSoup(response, "lxml")
 
@@ -31,10 +36,10 @@ def parse_hidemy(limit: int, countries: str, type: str, anon: str) -> set:
 
 
 def get_from_hidemy(
-    limit: int = 100,
-    countries: list = ["US"],
-    types: list = ["HTTP"],
-    anonimity: list = ["NONE"],
+    limit: int,
+    countries: list,
+    types: list,
+    anonimity: list,
 ) -> set:
     data = parse_hidemy(
         limit=limit,

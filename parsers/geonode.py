@@ -1,14 +1,19 @@
 import requests
 from templates import HEADER, AnonymityTypesTemplate, Proxy, ProxyTypesTemplate
+from requests.exceptions import ReadTimeout
 
 
 def parse_geonode(limit: int, country: list, type: str, anon: str) -> set[Proxy]:
     data = set()
     for country in country:
-        response = requests.get(
-            f"https://proxylist.geonode.com/api/proxy-list?limit={limit}&page=1&country={country}&protocols={type}&{anon}",
-            headers=HEADER,
-        ).json()
+        try:
+            response = requests.get(
+                f"https://proxylist.geonode.com/api/proxy-list?limit={limit}&page=1&country={country}&protocols={type}&{anon}",
+                headers=HEADER,
+                timeout=5
+            ).json()
+        except ReadTimeout:
+            return data
         proxies = response["data"]
         for item in proxies:
             data.add(Proxy(ip=item["ip"], port=item["port"], country=country))
@@ -16,10 +21,10 @@ def parse_geonode(limit: int, country: list, type: str, anon: str) -> set[Proxy]
 
 
 def get_from_geonode(
-    limit: int = 1,
-    country: list = ["US"],
-    types: list = ["HTTP"],
-    anonimity: list = ["NONE"],
+    limit: int,
+    country: list,
+    types: list,
+    anonimity: list,
 ) -> set[Proxy]:
     '''
     Method that collect proxies geonode.com

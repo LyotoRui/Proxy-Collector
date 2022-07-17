@@ -1,0 +1,2 @@
+class ArgsValidationError(Exception):
+    pass
