@@ -10,17 +10,19 @@ class Proxy:
     '''Base class for proxy object.'''
     ip: str
     port: str
+    type: str
     country: str
     speed: float
 
-    def __init__(self, ip: str, port: str, country: str, speed: float = None) -> None:
+    def __init__(self, ip: str, port: str, type: str, country: str, speed: float = None) -> None:
         self.ip = ip
         self.port = port
         self.country = country
+        self.type = type.lower()
         self.speed = speed
 
     def __repr__(self) -> str:
-        return f"{self.country} -- {self.ip}:{self.port} - {self.speed}"
+        return f"{self.country} -- {self.type} - {self.ip}:{self.port} - {self.speed}"
 
 
 class ProxyTypes(Enum):
@@ -49,7 +51,8 @@ class AnonymityTypes(Enum):
 
 class ProxyTypesTemplate(Enum):
     HIDEMY = {"HTTP": "h", "HTTPS": "s", "SOCKS4": "4", "SOCKS5": "5"}
-    GEONODE = {"HTTP": "http", "HTTPS": "https", "SOCKS4": "sock4", "SOCKS5": "socks5"}
+    GEONODE = {"HTTP": "http", "HTTPS": "https", "SOCKS4": "socks4", "SOCKS5": "socks5"}
+    PROXYSCRAPE = {'HTTP': 'http', 'HTTPS': 'http', 'SOCKS4': 'socks4', 'SOCKS5': 'socks5'}
 
 
 class AnonymityTypesTemplate(Enum):
@@ -58,7 +61,13 @@ class AnonymityTypesTemplate(Enum):
         "HIGH": "elite",
         "MEDIUM": "anonymous",
         "LOW": "anonymous",
-        "NONE": "transparent",
+        "NONE": "transparent"
+    }
+    PROXYSCRAPE = {
+        "HIGH": "elite",
+        "MEDIUM": "anonymous",
+        "LOW": "anonymous",
+        "NONE": "transparent"
     }
 
 
