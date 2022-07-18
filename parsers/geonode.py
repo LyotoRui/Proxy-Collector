@@ -16,7 +16,7 @@ def parse_geonode(limit: int, country: list, type: str, anon: str) -> set[Proxy]
             return data
         proxies = response["data"]
         for item in proxies:
-            data.add(Proxy(ip=item["ip"], port=item["port"], country=country))
+            data.add(Proxy(ip=item["ip"], port=item["port"], type=item['protocols'][0], country=country))
     return data
 
 

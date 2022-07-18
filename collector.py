@@ -2,6 +2,7 @@ from operator import attrgetter
 
 from parsers.geonode import get_from_geonode
 from parsers.hidemy import get_from_hidemy
+from parsers.proxyscrape import get_from_proxyscrape
 from templates import Proxy
 from tools import check_proxies, check_income_args
 from exceptions import ArgsValidationError
@@ -38,9 +39,14 @@ class Collector:
         hidemy_data = get_from_hidemy(
             limit=limit, countries=countries, types=types, anonimity=anon
         )
+        proxyscrape_data = get_from_proxyscrape(
+            countries=countries, types=types, anonimity=anon
+        )
         complite_data.update(geonode_data)
         complite_data.update(hidemy_data)
+        complite_data.update(proxyscrape_data)
         checked_data = check_proxies(complite_data)
+        print(checked_data)
         return sorted(checked_data, key=attrgetter("speed"))
 
-print(Collector.do_work(10, ['US']))
+print(Collector.do_work())

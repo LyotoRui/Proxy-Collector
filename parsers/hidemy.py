@@ -4,7 +4,7 @@ from templates import HEADER, AnonymityTypesTemplate, Proxy, ProxyTypesTemplate
 from requests.exceptions import ReadTimeout
 
 
-def parse_hidemy(limit: int, countries: str, type: str, anon: str) -> set | None:
+def parse_hidemy(limit: int, countries: list[str], type: str, anon: str) -> set | None:
     for country in countries:
         try:
             response = requests.get(
@@ -27,7 +27,8 @@ def parse_hidemy(limit: int, countries: str, type: str, anon: str) -> set | None
                     Proxy(
                         ip=line[0].text.strip(),
                         port=line[1].text.strip(),
-                        country=country,
+                        type=line[4].text.strip(),
+                        country=country
                     )
                 )
             except IndexError:
@@ -48,3 +49,6 @@ def get_from_hidemy(
         anon="".join([AnonymityTypesTemplate.HIDEMY.value[type] for type in anonimity]),
     )
     return data
+
+
+# parse_hidemy(1, ['US'], ['HTTP'], ['HIGH'])

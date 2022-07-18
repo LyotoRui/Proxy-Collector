@@ -12,14 +12,15 @@ def check_proxies(proxies: set[Proxy]) -> set:
         try:
             start = monotonic()
             requests.get(
-                "https://infoport.pro",
+                "https://google.com",
                 headers=HEADER,
-                proxies={"http": f"http://{proxy.ip}:{proxy.port}"},
+                proxies={f"{proxy.type}": f"{proxy.type}://{proxy.ip}:{proxy.port}"},
                 timeout=3,
             )
             proxy.speed = (monotonic() - start).__round__(2)
             checked_proxies.add(proxy)
-        except Exception:
+        except Exception as error:
+            logger.error(error)
             continue
     return checked_proxies
 
@@ -57,7 +58,7 @@ def __check_anon_arg(anon: list[str] | None = None) -> bool:
     for type in anon:
         if type not in AnonymityTypes.get_list_of_values():
             return False
-    return False
+    return True
 
 
 def check_income_args(
@@ -65,11 +66,10 @@ def check_income_args(
     types: list[str] | None = None,
     anon: list[str] | None = None,
 ) -> bool:
-    if not any(
-        (__check_country_arg(countries=countries),
+    return all(
+        (
+        __check_country_arg(countries=countries),
         __check_type_arg(types=types),
-        __check_anon_arg(anon=anon))
-    ):
-        return False
-    else:
-        return True
+        __check_anon_arg(anon=anon)
+        )
+    )
