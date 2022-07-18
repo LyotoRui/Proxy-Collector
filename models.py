@@ -299,4 +299,6 @@ class Countries(Enum):
         return [item.value for item in Countries]
     
     def get_list_of_names():
-        return [item.name for item in Countries]
+        return [item.name.replace('_', ' ') for item in Countries]
+
+print(Countries.get_list_of_names())

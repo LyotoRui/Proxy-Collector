@@ -3,7 +3,7 @@ from time import monotonic
 import requests
 from loguru import logger
 
-from templates import HEADER, AnonymityTypes, Countries, Proxy, ProxyTypes
+from models import HEADER, AnonymityTypes, Countries, Proxy, ProxyTypes
 
 
 def check_proxies(proxies: set[Proxy]) -> set:

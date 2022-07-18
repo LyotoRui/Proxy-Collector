@@ -1,6 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
-from templates import HEADER, AnonymityTypesTemplate, Proxy, ProxyTypesTemplate
+from models import HEADER, AnonymityTypesTemplate, Proxy, ProxyTypesTemplate
 from requests.exceptions import ReadTimeout
 
 

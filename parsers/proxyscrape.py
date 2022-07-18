@@ -1,6 +1,6 @@
 from posixpath import split
 import requests
-from templates import HEADER, AnonymityTypesTemplate, Proxy, ProxyTypesTemplate
+from models import HEADER, AnonymityTypesTemplate, Proxy, ProxyTypesTemplate
 
 
 def parse_proxyscrape(countries: list, types: list, anon: str) -> set[Proxy]:

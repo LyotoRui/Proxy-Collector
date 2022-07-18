@@ -3,7 +3,7 @@ from operator import attrgetter
 from parsers.geonode import get_from_geonode
 from parsers.hidemy import get_from_hidemy
 from parsers.proxyscrape import get_from_proxyscrape
-from templates import Proxy
+from models import Proxy
 from tools import check_proxies, check_income_args
 from exceptions import ArgsValidationError
 

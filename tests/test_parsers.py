@@ -2,7 +2,7 @@ import random
 from parsers.geonode import parse_geonode
 from parsers.hidemy import parse_hidemy
 from parsers.proxyscrape import parse_proxyscrape
-from templates import Proxy, Countries, ProxyTypesTemplate, AnonymityTypesTemplate
+from models import Proxy, Countries, ProxyTypesTemplate, AnonymityTypesTemplate
 
 
 

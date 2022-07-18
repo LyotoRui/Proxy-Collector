@@ -1,5 +1,5 @@
 import requests
-from templates import HEADER, AnonymityTypesTemplate, Proxy, ProxyTypesTemplate
+from models import HEADER, AnonymityTypesTemplate, Proxy, ProxyTypesTemplate
 from requests.exceptions import ReadTimeout
 
 
