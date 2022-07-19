@@ -4,7 +4,7 @@ from parsers.geonode import get_from_geonode
 from parsers.hidemy import get_from_hidemy
 from parsers.proxyscrape import get_from_proxyscrape
 from models import Proxy
-from tools import check_proxies, check_income_args
+from tools import check_proxies, check_income_args, response_data_transformation
 from exceptions import ArgsValidationError
 
 class Collector:
@@ -12,7 +12,7 @@ class Collector:
     Base class to scrap proxy from different sources.
     '''
     @staticmethod
-    def do_work(limit: int = 1, countries: list[str] = ['US'], types: list[str] = ['HTTP'], anon: list[str] = ['HIGH']) -> set[Proxy]:
+    def do_work(limit: int = 20, countries: list[str] = ['US'], types: list[str] = ['HTTP'], anon: list[str] = ['HIGH'], format: list[str] = ['json']) -> set[Proxy]:
         '''
         The only method in class.
 
@@ -47,6 +47,4 @@ class Collector:
         complite_data.update(proxyscrape_data)
         checked_data = check_proxies(complite_data)
         print(checked_data)
-        return sorted(checked_data, key=attrgetter("speed"))
-
-print(Collector.do_work())
+        return response_data_transformation(format=format[0], data=checked_data, countries=countries)

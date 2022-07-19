@@ -1,5 +1,4 @@
 from enum import Enum
-from time import monotonic
 
 HEADER = {
     "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.115 Safari/537.36 OPR/88.0.4412.75"
@@ -23,6 +22,16 @@ class Proxy:
 
     def __repr__(self) -> str:
         return f"{self.country} -- {self.type} - {self.ip}:{self.port} - {self.speed}"
+    
+    def to_json(self):
+        return {
+            'ip': self.ip,
+            'port': self.port,
+            'type': self.type
+        }
+
+    def to_string(self):
+        return f"{self.country}--{self.type}--{self.ip}:{self.port}--{self.speed}"
 
 
 class ProxyTypes(Enum):
@@ -158,7 +167,6 @@ class Countries(Enum):
     GUINEA = "GN"
     GUYANA = "GY"
     HAITI = "HT"
-    HEARD_ISLAND_AND_MCDONALD_ISLANDS = "HM"
     HONDURAS = "HN"
     HONG_KONG = "HK"
     HUNGARY = "HU"
@@ -189,7 +197,6 @@ class Countries(Enum):
     LITHUANIA = "LT"
     LUXEMBOURG = "LU"
     MACAO = "MO"
-    REPUBLIC_OF_NORTH_MACEDONIA = "MK"
     MADAGASCAR = "MG"
     MALAWI = "MW"
     MALAYSIA = "MY"
@@ -241,8 +248,8 @@ class Countries(Enum):
     SAINT_BARTHÉLEMY = "BL"
     SAINT_KITTS_AND_NEVIS = "KN"
     SAINT_LUCIA = "LC"
-    SAINT_PIERRE_AND_MIQUELON = "PM"
-    SAINT_VINCENT_AND_THE_GRENADINES = "VC"
+    SAINT_PIERRE = "PM"
+    SAINT_VINCENT = "VC"
     SAMOA = "WS"
     SAN_MARINO = "SM"
     SAO_TOME_AND_PRINCIPE = "ST"
@@ -257,7 +264,7 @@ class Countries(Enum):
     SOLOMON_ISLANDS = "SB"
     SOMALIA = "SO"
     SOUTH_AFRICA = "ZA"
-    SOUTH_GEORGIA_AND_THE_SOUTH_SANDWICH_ISLANDS = "GS"
+    SOUTH_GEORGIA = "GS"
     SOUTH_SUDAN = "SS"
     SPAIN = "ES"
     SRI_LANKA = "LK"
@@ -280,7 +287,7 @@ class Countries(Enum):
     UGANDA = "UG"
     UKRAINE = "UA"
     UNITED_ARAB_EMIRATES = "AE"
-    UNITED_KINGDOM_OF_GREAT_BRITAIN_AND_NORTHERN_IRELAND = "GB"
+    GREAT_BRITAIN = "GB"
     UNITED_STATES_OF_AMERICA = "US"
     URUGUAY = "UY"
     UZBEKISTAN = "UZ"
@@ -300,5 +307,3 @@ class Countries(Enum):
     
     def get_list_of_names():
         return [item.name.replace('_', ' ') for item in Countries]
-
-print(Countries.get_list_of_names())

@@ -8,14 +8,17 @@ def parse_proxyscrape(countries: list, types: list, anon: str) -> set[Proxy]:
     for country, type in zip(countries, types):
         response = requests.get(f'https://api.proxyscrape.com/v2/?request=displayproxies&protocol={type}&country={country}&anonymity={anon}', headers=HEADER).text
         for item in response.split('/n'):
-            data.add(
-                Proxy(
-                    ip=item.split(':')[0],
-                    port=item.split(':')[1],
-                    type=type,
-                    country=country
+            try:
+                data.add(
+                    Proxy(
+                        ip=item.split(':')[0],
+                        port=item.split(':')[1],
+                        type=type,
+                        country=country
+                    )
                 )
-            )
+            except IndexError:
+                continue
     return data
 
 def get_from_proxyscrape(
