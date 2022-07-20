@@ -1,9 +1,7 @@
 from time import monotonic
 
-
 import requests
 from loguru import logger
-
 
 from models import HEADER, AnonymityTypes, Countries, Proxy, ProxyTypes
 
@@ -43,8 +41,7 @@ def check_proxies(proxies: set[Proxy]) -> set[Proxy]:
             )
             proxy.speed = (monotonic() - start).__round__(2)
             checked_proxies.add(proxy)
-        except Exception as error:
-            logger.error(error)
+        except Exception:
             continue
     return checked_proxies
 
