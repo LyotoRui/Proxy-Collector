@@ -10,13 +10,20 @@ def parse_geonode(limit: int, country: list, type: str, anon: str) -> set[Proxy]
             response = requests.get(
                 f"https://proxylist.geonode.com/api/proxy-list?limit={limit}&page=1&country={country}&protocols={type}&{anon}",
                 headers=HEADER,
-                timeout=5
+                timeout=5,
             ).json()
         except ReadTimeout:
             return data
         proxies = response["data"]
         for item in proxies:
-            data.add(Proxy(ip=item["ip"], port=item["port"], type=item['protocols'][0], country=country))
+            data.add(
+                Proxy(
+                    ip=item["ip"],
+                    port=item["port"],
+                    type=item["protocols"][0],
+                    country=country,
+                )
+            )
     return data
 
 
@@ -26,9 +33,9 @@ def get_from_geonode(
     types: list,
     anonimity: list,
 ) -> set[Proxy]:
-    '''
+    """
     Method that collect proxies geonode.com
-    '''
+    """
     data = parse_geonode(
         limit=limit,
         country=country,

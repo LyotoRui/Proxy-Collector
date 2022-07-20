@@ -10,7 +10,7 @@ def parse_hidemy(limit: int, countries: list[str], type: str, anon: str) -> set 
             response = requests.get(
                 f"https://hidemy.name/ru/proxy-list/?country={country}&type={type}&anon={anon}#list",
                 headers=HEADER,
-                timeout=5
+                timeout=5,
             ).text
         except ReadTimeout:
             return set()
@@ -28,7 +28,7 @@ def parse_hidemy(limit: int, countries: list[str], type: str, anon: str) -> set 
                         ip=line[0].text.strip(),
                         port=line[1].text.strip(),
                         type=line[4].text.strip(),
-                        country=country
+                        country=country,
                     )
                 )
             except IndexError:
@@ -49,6 +49,3 @@ def get_from_hidemy(
         anon="".join([AnonymityTypesTemplate.HIDEMY.value[type] for type in anonimity]),
     )
     return data
-
-
-# parse_hidemy(1, ['US'], ['HTTP'], ['HIGH'])
