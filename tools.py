@@ -11,7 +11,6 @@ def response_data_transformation(
 ) -> str:
     match format:
         case "json":
-            print(__transform_data_to_json(data=data, countries=countries))
             return __transform_data_to_json(data=data, countries=countries)
         case "txt":
             return __transform_data_to_txt(data=data)
@@ -25,7 +24,7 @@ def __transform_data_to_json(data: set[Proxy], countries: list[str]) -> str:
 
 
 def __transform_data_to_txt(data: set[Proxy]) -> str:
-    pass
+    return '\n'.join([f'{proxy.country}--{proxy.type}--{proxy.ip}:{proxy.port}' for proxy in data])
 
 
 def check_proxies(proxies: set[Proxy]) -> set[Proxy]:
