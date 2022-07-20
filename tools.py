@@ -24,7 +24,9 @@ def __transform_data_to_json(data: set[Proxy], countries: list[str]) -> str:
 
 
 def __transform_data_to_txt(data: set[Proxy]) -> str:
-    return '\n'.join([f'{proxy.country}--{proxy.type}--{proxy.ip}:{proxy.port}' for proxy in data])
+    return "\n".join(
+        [f"{proxy.country}--{proxy.type}--{proxy.ip}:{proxy.port}" for proxy in data]
+    )
 
 
 def check_proxies(proxies: set[Proxy]) -> set[Proxy]:

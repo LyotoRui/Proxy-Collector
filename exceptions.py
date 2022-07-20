@@ -1,2 +1,2 @@
 class ArgsValidationError(Exception):
-    '''One or more params are wrong'''
+    """One or more params are wrong"""

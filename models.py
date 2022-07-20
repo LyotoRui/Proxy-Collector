@@ -6,14 +6,17 @@ HEADER = {
 
 
 class Proxy:
-    '''Base class for proxy object.'''
+    """Base class for proxy object."""
+
     ip: str
     port: str
     type: str
     country: str
     speed: float
 
-    def __init__(self, ip: str, port: str, type: str, country: str, speed: float = None) -> None:
+    def __init__(
+        self, ip: str, port: str, type: str, country: str, speed: float = None
+    ) -> None:
         self.ip = ip
         self.port = port
         self.country = country
@@ -22,13 +25,9 @@ class Proxy:
 
     def __repr__(self) -> str:
         return f"{self.country} -- {self.type} - {self.ip}:{self.port} - {self.speed}"
-    
+
     def to_json(self):
-        return {
-            'ip': self.ip,
-            'port': self.port,
-            'type': self.type
-        }
+        return {"ip": self.ip, "port": self.port, "type": self.type}
 
     def to_string(self):
         return f"{self.country}--{self.type}--{self.ip}:{self.port}--{self.speed}"
@@ -42,9 +41,10 @@ class ProxyTypes(Enum):
 
     def get_list_of_values():
         return [type.value for type in ProxyTypes]
-    
+
     def get_list_of_names():
         return [type.name for type in ProxyTypes]
+
 
 class AnonymityTypes(Enum):
     HIGH = "HIGH"
@@ -54,14 +54,20 @@ class AnonymityTypes(Enum):
 
     def get_list_of_values():
         return [type.value for type in AnonymityTypes]
-    
+
     def get_list_of_names():
         return [type.name for type in AnonymityTypes]
+
 
 class ProxyTypesTemplate(Enum):
     HIDEMY = {"HTTP": "h", "HTTPS": "s", "SOCKS4": "4", "SOCKS5": "5"}
     GEONODE = {"HTTP": "http", "HTTPS": "https", "SOCKS4": "socks4", "SOCKS5": "socks5"}
-    PROXYSCRAPE = {'HTTP': 'http', 'HTTPS': 'http', 'SOCKS4': 'socks4', 'SOCKS5': 'socks5'}
+    PROXYSCRAPE = {
+        "HTTP": "http",
+        "HTTPS": "http",
+        "SOCKS4": "socks4",
+        "SOCKS5": "socks5",
+    }
 
 
 class AnonymityTypesTemplate(Enum):
@@ -70,22 +76,22 @@ class AnonymityTypesTemplate(Enum):
         "HIGH": "elite",
         "MEDIUM": "anonymous",
         "LOW": "anonymous",
-        "NONE": "transparent"
+        "NONE": "transparent",
     }
     PROXYSCRAPE = {
         "HIGH": "elite",
         "MEDIUM": "anonymous",
         "LOW": "anonymous",
-        "NONE": "transparent"
+        "NONE": "transparent",
     }
 
 
 class Countries(Enum):
-    '''
+    """
     Class than contains Alpha-2 codes of different countries.
-    
+
     Inherited from Enum.
-    '''
+    """
 
     ARGENTINA = "AR"
     ARMENIA = "AM"
@@ -139,6 +145,6 @@ class Countries(Enum):
 
     def get_list_of_values():
         return [item.value for item in Countries]
-    
+
     def get_list_of_names():
-        return [item.name.replace('_', ' ') for item in Countries]
+        return [item.name.replace("_", " ") for item in Countries]
