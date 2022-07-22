@@ -9,6 +9,14 @@ from models import HEADER, AnonymityTypes, Countries, Proxy, ProxyTypes
 def response_data_transformation(
     format: str, data: set[Proxy], countries: list[str]
 ) -> str:
+    '''Function that transform data from set[Proxy] to text format.
+    
+    :param str format: - Format param. It could be TXT or JSON.
+
+    :param set[Proxy] data: - Set of Proxy objects.
+
+    :param list[str] countries: - List of Alpha-2 country codes from user input.
+    '''
     match format:
         case "json":
             return __transform_data_to_json(data=data, countries=countries)
@@ -16,7 +24,13 @@ def response_data_transformation(
             return __transform_data_to_txt(data=data)
 
 
-def __transform_data_to_json(data: set[Proxy], countries: list[str]) -> str:
+def __transform_data_to_json(data: set[Proxy], countries: list[str]) -> dict:
+    '''Function that transform data from set[Proxy] to JSON format.
+
+    :param set[Proxy] data: - Set of Proxy objects.
+
+    :param list[str] countries: - List of Alpha-2 country codes from user input.
+    ''' 
     return {
         country: [proxy.to_json() for proxy in data if proxy.country == country]
         for country in countries
@@ -24,6 +38,10 @@ def __transform_data_to_json(data: set[Proxy], countries: list[str]) -> str:
 
 
 def __transform_data_to_txt(data: set[Proxy]) -> str:
+    '''Function that transform data from set[Proxy] to TXT format.
+
+    :param set[Proxy] data: - Set of Proxy objects.
+    ''' 
     return "\n".join(
         [f"{proxy.country}--{proxy.type}--{proxy.ip}:{proxy.port}" for proxy in data]
     )

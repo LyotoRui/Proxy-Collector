@@ -3,7 +3,7 @@ from models import HEADER, AnonymityTypesTemplate, Proxy, ProxyTypesTemplate
 from requests.exceptions import ReadTimeout
 
 
-def parse_geonode(limit: int, country: list, type: str, anon: str) -> set[Proxy]:
+def __parse_geonode(limit: int, country: list, type: str, anon: str) -> set[Proxy]:
     data = set()
     for country in country:
         try:
@@ -34,9 +34,17 @@ def get_from_geonode(
     anonimity: list,
 ) -> set[Proxy]:
     """
-    Method that collect proxies geonode.com
+    Function that collects proxies from Geonode.com.
+
+    :param int limit: - Count of proxies from user`s input.
+
+    :param list country: - List of coutries in Alpha-2.
+
+    :param list type: - List of proxy types that required.
+
+    :param list anon: - List of proxy anonymity types.
     """
-    data = parse_geonode(
+    data = __parse_geonode(
         limit=limit,
         country=country,
         type="%2C".join([ProxyTypesTemplate.GEONODE.value[type] for type in types]),

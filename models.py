@@ -6,8 +6,6 @@ HEADER = {
 
 
 class Proxy:
-    """Base class for proxy object."""
-
     ip: str
     port: str
     type: str
@@ -17,6 +15,20 @@ class Proxy:
     def __init__(
         self, ip: str, port: str, type: str, country: str, speed: float = None
     ) -> None:
+        """
+        Base class for proxy object.
+
+        :param str ip: - Adress of server
+
+        :param str port: - Port of connection
+
+        :param str type: - Protocol of proxy
+
+        :param str country: - Location of proxy
+
+        :param float speed: - Time spent connecting through a proxy
+
+        """
         self.ip = ip
         self.port = port
         self.country = country
@@ -27,9 +39,11 @@ class Proxy:
         return f"{self.country} -- {self.type} - {self.ip}:{self.port} - {self.speed}"
 
     def to_json(self):
+        '''Method that returns self params as dict'''
         return {"ip": self.ip, "port": self.port, "type": self.type}
 
     def to_string(self):
+        '''Method that returns self params as string'''
         return f"{self.country}--{self.type}--{self.ip}:{self.port}--{self.speed}"
 
 

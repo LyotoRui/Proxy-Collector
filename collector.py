@@ -9,6 +9,7 @@ from tools import check_income_args, check_proxies, response_data_transformation
 class Collector:
     """
     Base class to scrap proxy from different sources.
+
     """
 
     @staticmethod
@@ -20,17 +21,21 @@ class Collector:
         format: list[str] = ["json"],
     ) -> set[Proxy]:
         """
-        The only method in class.
+        The only method in class. That does all the work.
+        
+        It collects proxies from Geonode.com, HideMy.name and Proxyscrape.com
 
-        :params:
+        :param int limit: - How many items should be returned.
 
-        limit - How many items should be returned.
+        :param list[str] countries: - In what country proxies shold be located. Countries must be as Alpha-2 code or use Country class from templates.
 
-        countries - In what country proxies shold be located. Countries must be as Alpha-2 code or use Country class from templates.
+        :param list[str] types: - What types this proxies should be. Use string params or use ProxyTypes class from templates.
 
-        types - What types this proxies should be. Use string params or use ProxyTypes class from templates.
+        :param list[str] anon: - Anonymity levels. Use string params, such as HIGH, MEDIUM, LOW, NONE, or use AnonymityTypes class from templates.
 
-        anon - Anonymity types. Use string params or use AnonymityTypes class from templates.
+        :param str format: - What format of returned file should be.
+
+        :returns dict | str:
         """
         if not check_income_args(countries=countries, types=types, anon=anon):
             raise ArgsValidationError

@@ -42,6 +42,17 @@ def get_from_hidemy(
     types: list,
     anonimity: list,
 ) -> set:
+    """
+    Function that collects proxies from Hidemy.name.
+
+    :param int limit: - Count of proxies from user`s input.
+
+    :param list country: - List of coutries in Alpha-2.
+
+    :param list type: - List of proxy types that required.
+
+    :param list anon: - List of proxy anonymity types.
+    """
     data = parse_hidemy(
         limit=limit,
         countries=countries,

@@ -1,5 +1,5 @@
 from flask import Flask
-
+import os
 from routes.api import api
 from routes.index import main
 
@@ -18,5 +18,6 @@ def create_app() -> Flask:
 
 app = create_app()
 
+
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host=os.getenv('HOST'), port=os.getenv('PORT'))

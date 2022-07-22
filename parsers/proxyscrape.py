@@ -26,6 +26,15 @@ def get_from_proxyscrape(
     types: list,
     anonimity: list,
 ) -> set[Proxy]:
+    """
+    Function that collects proxies from ProxyScrape.com.
+
+    :param list country: - List of coutries in Alpha-2.
+
+    :param list type: - List of proxy types that required.
+
+    :param list anon: - List of proxy anonymity types.
+    """
     data = parse_proxyscrape(
         countries=countries,
         types=[ProxyTypesTemplate.PROXYSCRAPE.value.get(type) for type in types],
