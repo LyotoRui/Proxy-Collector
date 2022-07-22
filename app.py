@@ -1,5 +1,7 @@
-from flask import Flask
 import os
+
+from flask import Flask
+
 from routes.api import api
 from routes.index import main
 
