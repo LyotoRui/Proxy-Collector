@@ -4,7 +4,7 @@ from models import HEADER, AnonymityTypesTemplate, Proxy, ProxyTypesTemplate
 from requests.exceptions import ReadTimeout
 
 
-def parse_hidemy(limit: int, countries: list[str], type: str, anon: str) -> set | None:
+def __parse_hidemy(limit: int, countries: list[str], type: str, anon: str) -> set | None:
     for country in countries:
         try:
             response = requests.get(
@@ -46,14 +46,12 @@ def get_from_hidemy(
     Function that collects proxies from Hidemy.name.
 
     :param int limit: - Count of proxies from user`s input.
-
     :param list country: - List of coutries in Alpha-2.
-
     :param list type: - List of proxy types that required.
-
     :param list anon: - List of proxy anonymity types.
+    :returns set[Proxy]: - Returns a set of Proxy objects
     """
-    data = parse_hidemy(
+    data = __parse_hidemy(
         limit=limit,
         countries=countries,
         type="".join([ProxyTypesTemplate.HIDEMY.value[type] for type in types]),

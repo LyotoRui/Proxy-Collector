@@ -3,7 +3,7 @@ import requests
 from models import HEADER, AnonymityTypesTemplate, Proxy, ProxyTypesTemplate
 
 
-def parse_proxyscrape(countries: list, types: list, anon: str) -> set[Proxy]:
+def __parse_proxyscrape(countries: list, types: list, anon: str) -> set[Proxy]:
     data = set()
     for country, type in zip(countries, types):
         response = requests.get(f'https://api.proxyscrape.com/v2/?request=displayproxies&protocol={type}&country={country}&anonymity={anon}', headers=HEADER).text
@@ -30,12 +30,11 @@ def get_from_proxyscrape(
     Function that collects proxies from ProxyScrape.com.
 
     :param list country: - List of coutries in Alpha-2.
-
     :param list type: - List of proxy types that required.
-
     :param list anon: - List of proxy anonymity types.
+    :returns set[Proxy]: - Returns a set of Proxy objects
     """
-    data = parse_proxyscrape(
+    data = __parse_proxyscrape(
         countries=countries,
         types=[ProxyTypesTemplate.PROXYSCRAPE.value.get(type) for type in types],
         anon=[AnonymityTypesTemplate.PROXYSCRAPE.value.get(type) for type in anonimity]

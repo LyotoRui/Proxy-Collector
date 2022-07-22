@@ -37,12 +37,10 @@ def get_from_geonode(
     Function that collects proxies from Geonode.com.
 
     :param int limit: - Count of proxies from user`s input.
-
     :param list country: - List of coutries in Alpha-2.
-
     :param list type: - List of proxy types that required.
-
     :param list anon: - List of proxy anonymity types.
+    :returns set[Proxy]: - Returns a set of Proxy objects
     """
     data = __parse_geonode(
         limit=limit,
